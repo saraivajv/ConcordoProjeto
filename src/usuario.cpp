@@ -1,4 +1,4 @@
-#include "usuario.hpp"
+#include "../include/usuario.hpp"
 
 Usuario::Usuario(int id, string nome, string email, string senha){
     this->id = id;

@@ -1,4 +1,4 @@
-#include "mensagem.hpp"
+#include "../include/mensagem.hpp"
 
 Mensagem::Mensagem(string dataHora, int enviadoPor, string conteudo){
     this->dataHora = dataHora;

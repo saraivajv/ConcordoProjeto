@@ -1,4 +1,4 @@
-#include "servidor.hpp"
+#include "../include/servidor.hpp"
 
 Servidor::Servidor(int usuarioDonoId, string nome, string descricao, string codigoConvite, std::vector<Canal*> canais, std::vector<int> participantesIDs){
     this->usuarioDonoId = usuarioDonoId;

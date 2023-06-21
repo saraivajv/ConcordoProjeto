@@ -1,4 +1,4 @@
-#include "canalvoz.hpp"
+#include "../include/canalvoz.hpp"
 
 
 CanalVoz::CanalVoz(Mensagem ultimaMensagem){

@@ -1,4 +1,4 @@
-#include "canaltexto.hpp"
+#include "../include/canaltexto.hpp"
 
 
 CanalTexto::CanalTexto(std::vector <Mensagem> mensagens){
