@@ -8,3 +8,9 @@ Sistema::Sistema(std::vector<Usuario> usuarios, std::vector<Servidor> servidores
     this->servidorAtual = servidorAtual;
     this->canalAtual = canalAtual;
 };
+
+Sistema::Sistema()
+{};
+
+Sistema::~Sistema()
+{};

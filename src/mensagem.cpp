@@ -5,3 +5,9 @@ Mensagem::Mensagem(string dataHora, int enviadoPor, string conteudo){
     this->enviadoPor = enviadoPor;
     this->conteudo = conteudo;
 }
+
+Mensagem::Mensagem()
+{};
+
+Mensagem::~Mensagem()
+{};

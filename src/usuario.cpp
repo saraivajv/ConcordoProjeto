@@ -6,3 +6,9 @@ Usuario::Usuario(int id, string nome, string email, string senha){
     this->email = email;
     this->senha = senha;
 }
+
+Usuario::Usuario()
+{};
+
+Usuario::~Usuario()
+{};

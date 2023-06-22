@@ -4,3 +4,9 @@
 CanalTexto::CanalTexto(std::vector <Mensagem> mensagens){
     this->mensagens = mensagens;
 };
+
+CanalTexto::CanalTexto()
+{};
+
+CanalTexto::~CanalTexto()
+{};

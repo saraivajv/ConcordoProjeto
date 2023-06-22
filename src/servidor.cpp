@@ -8,3 +8,9 @@ Servidor::Servidor(int usuarioDonoId, string nome, string descricao, string codi
     this->canais = canais;
     this->participantesIDs = participantesIDs;
 };
+
+Servidor::Servidor()
+{};
+
+Servidor::~Servidor()
+{};

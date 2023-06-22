@@ -10,8 +10,17 @@ int main(int argc, char* argv[]){
     while(true){
         getline(cin, linha);
 
-        if(linha.find("create-user") != std::string::npos){
+        if(linha.find("create-user ") != std::string::npos){
             cout << "Criou um usuário!!";
+        }
+
+        if(linha.find("login ") != std::string::npos){
+            cout << "Logado como ...";
+        }
+
+        if(linha.find("quit ") != std::string::npos){
+            cout << "Saindo...";
+            return 0;
         }
         
     }
