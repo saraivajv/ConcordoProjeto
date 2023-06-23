@@ -6,7 +6,7 @@ using std::cin;
 int main(int argc, char* argv[]){
 
     string linha, textotratado;
-    int pos; int i = 0;
+    int pos; int i = 0; int j = 0;
 
     while(true){
         getline(cin, linha);
@@ -28,12 +28,14 @@ int main(int argc, char* argv[]){
                     cout << senha << std::endl;
                 }
 
+                else if(textotratado.find(" ") != std::string::npos && i > 1){
+                    string nome = textotratado;
+                    cout << nome << std::endl;
+                }
+
                 textotratado = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
                 i++;
             }
-
-            string nome = textotratado;
-            cout << nome << std::endl;
         
             // cout << "Criou um usuário!!" << std::endl;
         }
