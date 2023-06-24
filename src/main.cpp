@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
                     usuarios[id].setEmail(login);
                 }
                 
-                if(textotratado.find(" ") != std::string::npos && i != 0){
+                if(textotratado.find(" ") != std::string::npos && i == 1){
                     string senha = textotratado.substr(0, textotratado.find(" "));
                     cout << senha << std::endl;
                     usuarios[id].setSenha(senha);
@@ -35,12 +35,14 @@ int main(int argc, char* argv[]){
 
                 else if(textotratado.find(" ") != std::string::npos && i > 1){
                     nome += textotratado;
-                    cout << nome << std::endl;
                 }
 
                 textotratado = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
                 i++;
             }
+
+            usuarios[id].setNome(nome);
+            cout << nome << std::endl;
         
             // cout << "Criou um usuário!!" << std::endl;
 
