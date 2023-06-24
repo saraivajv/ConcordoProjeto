@@ -12,3 +12,19 @@ Usuario::Usuario()
 
 Usuario::~Usuario()
 {};
+
+void Usuario::setId(int id){
+    this->id = id;
+};
+
+void Usuario::setNome(string nome){
+    this->nome = nome;
+};
+
+void Usuario::setEmail(string email){
+    this->email = email;
+};
+
+void Usuario::setSenha(string senha){
+    this->senha = senha;
+};

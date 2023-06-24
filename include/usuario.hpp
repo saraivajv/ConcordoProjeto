@@ -21,6 +21,14 @@ class Usuario{
         Usuario(int id, string nome, string email, string senha);
 
         ~Usuario();
+
+        void setId(int id);
+
+        void setNome(string nome);
+
+        void setEmail(string email);
+
+        void setSenha(string senha);
 };
 
 #endif
