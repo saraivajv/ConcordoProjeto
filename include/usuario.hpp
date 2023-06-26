@@ -29,6 +29,14 @@ class Usuario{
         void setEmail(string email);
 
         void setSenha(string senha);
+
+        string getNome();
+
+        string getEmail();
+
+        string getSenha();
+
+        int getId();
 };
 
 #endif

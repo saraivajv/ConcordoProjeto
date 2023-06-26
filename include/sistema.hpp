@@ -26,6 +26,32 @@ class Sistema{
 
         Sistema(std::vector<Usuario> usuarios, std::vector<Servidor> servidores, int idUsuarioLogado, Servidor servidorAtual, Canal canalAtual);
 
+        void setUsuario(Usuario usuario);
+        
+        void setServidor(Servidor servidor);
+
+        void setIdUsuarioLogado(int idUsuarioLogado);
+
+        void setServidorAtual(Servidor servidorAtual);
+
+        void setCanalAtual(Canal canalAtual);
+
+        void setIdNovoUsuario(int id);
+
+        int getIdNovoUsuario();
+
+        Servidor getServidorAtual();
+
+        Canal getCanalAtual();
+
+        int getIdUsuarioLogado();
+
+        std::vector<Usuario> getUsuarios();
+        
+        std::vector<Servidor> getServidores();
+
+        void Logado();
+
         ~Sistema();
 
 };
