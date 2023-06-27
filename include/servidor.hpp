@@ -26,6 +26,30 @@ class Servidor{
 
         ~Servidor();
 
+        void setNome(string nome);
+
+        void setDonoId(int usuarioDonoId);
+
+        void setDescricao(string descricao);
+
+        void setCodigoConvite(string codigoConvite);
+
+        void setCanal(Canal* canal);
+
+        void setParticipantesId(int participanteId);
+
+        int getDonoId();
+
+        string getNome();
+
+        string getDescricao();
+
+        string getCodigoConvite();
+
+        std::vector<Canal*> getCanais();
+
+        std::vector<int> getParticipantesId();
+
 };
 
 #endif

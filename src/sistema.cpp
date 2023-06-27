@@ -65,15 +65,77 @@ std::vector<Servidor> Sistema::getServidores(){
 
 void Sistema::Logado(){
     string linha, textotratado;
-    getline(std::cin, linha);
+    Servidor novoservidor;
+    bool servidorexiste = false;
 
     while(true){
+        getline(std::cin, linha);
 
         if(linha.find("disconnect") != std::string::npos){
             cout << "Desconectando usuário " << usuarios[this->getIdUsuarioLogado()].getEmail() << std::endl;
             this->setIdUsuarioLogado(-1);
             break;
         }
+
+        if(linha.find("create-server ") != std::string::npos){
+            int pos = linha.find(" ");
+            textotratado = linha.substr(pos+1, linha.find("\n"));
+
+            for(int i = 0; i < this->servidores.size(); i++){
+                if(textotratado == this->servidores[i].getNome()){
+                    cout << "Servidor com esse nome já existe" << std::endl;
+                    servidorexiste = true;
+                    break;
+                }
+            }
+
+            if(servidorexiste == false){
+                string nomeserver;
+                nomeserver = textotratado;
+                novoservidor.setNome(nomeserver);
+                novoservidor.setDonoId(this->getIdUsuarioLogado());
+                this->setServidor(novoservidor);
+                this->setServidorAtual(novoservidor);
+                cout << "Servidor criado" << std::endl;
+            }
+        }
+
+        if(linha.find("set-server-desc ") != std::string::npos){
+            int i = 0;
+            bool descricaoexiste = false;
+            int pos = linha.find(" ");
+
+            textotratado = linha.substr(pos+1, linha.find("\n"));
+
+            while(textotratado.find(" ") < textotratado.find("\n") && descricaoexiste == false){
+                string server = textotratado.substr(0, textotratado.find(" "));
+                textotratado = textotratado.substr(textotratado.find(" "), textotratado.find("\n"));
+                if(server == this->getServidorAtual().getNome()){
+                    if(this->getServidorAtual().getDonoId() == this->getIdUsuarioLogado()){
+                        string descricao = textotratado;
+                        this->getServidorAtual().setDescricao(descricao);
+                        cout << "Descrição do servidor " << this->getServidorAtual().getNome() << " modificada!" << std::endl;
+                        break;
+                    }
+                }
+                if(server != this->getServidorAtual().getNome()){
+                    bool existe = false;
+                    for (int i = 0; i < this->getServidores().size(); i++){
+                        if(server == this->getServidores()[i].getNome()){
+                            existe = true;
+                            if(this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado()){
+                                cout << "“Você não pode alterar a descrição de um servidor que não foi criado por você" << std::endl;
+                                break;
+                            }
+                        }
+                    }
+                    cout << "Servidor " << server << " não existe" << std::endl;
+                    break;
+                }
+            }
+        }
+
+
     }
 
 
