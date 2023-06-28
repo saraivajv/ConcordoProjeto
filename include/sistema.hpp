@@ -50,6 +50,8 @@ class Sistema{
         
         std::vector<Servidor> getServidores();
 
+        void TelaInicial();
+
         void Logado();
 
         ~Sistema();
