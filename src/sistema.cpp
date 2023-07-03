@@ -199,6 +199,7 @@ void Sistema::Logado(){
             }
 
             if(servidorexiste == false){
+                Servidor novoservidor;
                 string nomeserver;
                 nomeserver = textotratado;
                 novoservidor.setNome(nomeserver);
@@ -266,13 +267,16 @@ void Sistema::Logado(){
                 }
                 else if(textotratado.find(" ") != std::string::npos){
                     string server = textotratado.substr(0, textotratado.find(" "));
-                    textotratado = textotratado.substr(textotratado.find(" "), textotratado.find("\n"));
+                    textotratado = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
+                    Servidor servidorAnalisado;
                     for(int i = 0; i < this->getServidores().size(); i++){
-                        if(this->getServidores()[i].getNome() == server){
-                            if(this->getServidores()[i].getDonoId() == this->getIdUsuarioLogado()){
+                        servidorAnalisado = getServidores()[i];
+                        if(servidorAnalisado.getNome() == server){
+                            if(servidorAnalisado.getDonoId() == this->getIdUsuarioLogado()){
                                 codigoconvite = textotratado;
-                                this->getServidores()[i].setCodigoConvite(codigoconvite);
-                                cout << "Código de convite do servidor " << this->getServidores()[i].getNome() << " modificado!" << std::endl;
+                                servidorAnalisado.setCodigoConvite(codigoconvite);
+                                cout << servidorAnalisado.getCodigoConvite() << std::endl;
+                                cout << "Código de convite do servidor " << servidorAnalisado.getNome() << " modificado!" << std::endl;
                                 break;
                             }
                         }
@@ -328,14 +332,15 @@ void Sistema::Logado(){
         if(linha.find("enter-server ") != std::string::npos){
             int pos = linha.find(" ");
             string server;
-            string codigoconvite = "";
+            string codigoconvite;
             textotratado = linha.substr(pos+1, linha.find("\n"));
             if(textotratado.find(" ") == std::string::npos){
                 server = textotratado;
             }
             else if(textotratado.find(" ") != std::string::npos){
                 server = textotratado.substr(0, textotratado.find(" "));
-                codigoconvite = textotratado.substr(textotratado.find(" "), textotratado.find("\n"));
+                codigoconvite = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
+                cout << codigoconvite << std::endl;
             }
             
 
@@ -343,31 +348,21 @@ void Sistema::Logado(){
                 if(server == this->getServidores()[i].getNome()){
                     if(this->getServidores()[i].getDonoId() == this->getIdUsuarioLogado()){
                         cout << "Entrou no servidor com sucesso" << std::endl;
-                        this->setServidorAtual(this->getServidores()[i]);
+                        Servidor svaux = this->getServidores()[i];
+                        this->setServidorAtual(svaux);
+                        break;
+                    }
+                    else if(this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado() && this->getServidores()[i].getCodigoConvite() == codigoconvite){
+                        cout << "Entrou no servidor com sucesso" << std::endl;
+                        Servidor svaux = this->getServidores()[i];
+                        svaux.setParticipantesId(this->getIdUsuarioLogado());
+                        this->setServidorAtual(svaux);
                         break;
                     }
                 }
-
-                if(this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado() && codigoconvite == ""){
-                    if(this->getServidores()[i].getCodigoConvite() == ""){
-                        this->getServidores()[i].setParticipantesId(this->getIdUsuarioLogado());
-                        cout << "Entrou no servidor com sucesso" << std::endl;
-                        this->setServidorAtual(this->getServidores()[i]);
-                        break;
-                    }
-                    else if(this->getServidores()[i].getCodigoConvite() != "" && this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado() && codigoconvite != this->getServidores()[i].getCodigoConvite()){
-                        cout << "Servidor requer código de convite" << std::endl;
-                        break;
-                    }
-                }
-
-                if(this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado() && codigoconvite != "" && codigoconvite == this->getServidores()[i].getCodigoConvite()){
-                    if(this->getServidores()[i].getCodigoConvite() == codigoconvite){
-                        this->getServidores()[i].setParticipantesId(this->getIdUsuarioLogado());
-                        cout << "Entrou no servidor com sucesso" << std::endl;
-                        this->setServidorAtual(this->getServidores()[i]);
-                        break;
-                    }
+                else if(this->getServidores()[i].getCodigoConvite() != codigoconvite && this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado()){
+                    cout << "Servidor requer código de convite" << std::endl;
+                    break;
                 }
             }
         }
@@ -384,14 +379,24 @@ void Sistema::Logado(){
         }
 
         if(linha.find("list-participants") != std::string::npos){
-            std::vector<int> ids;
-            ids = this->getServidorAtual().getParticipantesId();
-            for(int i = 0; i < ids.size(); i++){
-                for(int j = 0; j < ids.size(); j++){
-                    if(ids[i] == this->getUsuarios()[j].getId()){
-                        cout << this->getUsuarios()[j].getNome() << std::endl;
+            std::vector<Usuario> ususist = this->getUsuarios();
+            std::vector<int> idserv = this->getServidorAtual().getParticipantesId();
+            string nome;
+            bool found = false;
+            cout << this->getServidorAtual().getNome() << std::endl;
+
+            for(int i = 0; i < idserv.size(); i++){
+                cout << this->getServidorAtual().getParticipantesId()[i] << std::endl;
+                for(int j = 0; j < ususist.size(); j++){
+                    if(idserv[i] == ususist[j].getId()){
+                        nome = ususist[j].getNome();
+                        cout << nome << std::endl;
+                        found = true;
                         break;
                     }
+                }
+                if(found == true && idserv.size() == 1){
+                    break;
                 }
             }
         }

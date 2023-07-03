@@ -35,8 +35,8 @@ void Servidor::setCanal(Canal *canal){
     this->canais.push_back(canal);
 }
 
-void Servidor::setParticipantesId(int participanteId){
-    this->participantesIDs.push_back(participanteId);
+void Servidor::setParticipantesId(int participanteID){
+    this->participantesIDs.push_back(participanteID);
 }
 
 string Servidor::getNome(){
