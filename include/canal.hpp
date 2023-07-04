@@ -31,6 +31,10 @@ class Canal{
  * 
  */
         ~Canal();
+
+        void setNome(string nome);
+
+        string getNome();
 };
 
 #endif

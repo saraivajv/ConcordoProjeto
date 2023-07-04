@@ -179,6 +179,31 @@ void Sistema::Logado(){
     while(true){
         getline(std::cin, linha);
 
+        if(getServidorAtual().getNome() != "nulo"){
+
+            if(linha.find("create-channel ") != std::string::npos){
+                Servidor serveraux = this->servidorAtual;
+                int pos = linha.find(" ");
+                textotratado = linha.substr(pos+1, linha.find("\n"));
+                string nomecanal = textotratado.substr(0, textotratado.find(" "));
+                string tipocanal = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
+
+                if(tipocanal == "texto"){
+                    CanalTexto *tchannel = new CanalTexto();
+                    tchannel->setNome(nomecanal);
+                    serveraux.setCanal(tchannel);
+                    cout << serveraux.getCanais()[0]->getNome() << std::endl;
+                }
+                if(tipocanal == "voz"){
+                    CanalVoz *vchannel = new CanalVoz();
+                    vchannel->setNome(nomecanal);
+                    serveraux.setCanal(vchannel);
+                    cout << serveraux.getCanais()[0]->getNome() << std::endl;
+                }
+            }
+
+        }
+
         if(linha.find("disconnect") != std::string::npos){
             cout << "Desconectando usuário " << usuarios[this->getIdUsuarioLogado()].getEmail() << std::endl;
             this->setIdUsuarioLogado(-1);
@@ -375,6 +400,7 @@ void Sistema::Logado(){
         if(linha.find("leave-server") != std::string::npos){
             Servidor nulo;
             if(this->getServidorAtual().getNome() != ""){
+                nulo.setNome("nulo");
                 this->setServidorAtual(nulo);
                 cout << "Saindo do servidor " << this->getServidorAtual().getNome() << std::endl;
             }
