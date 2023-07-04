@@ -288,8 +288,9 @@ void Sistema::Logado(){
         }
         
         if(linha.find("list-servers") != std::string::npos){
-            for(int i = 0; i < this->getServidores().size(); i++){
-                cout << this->getServidores()[i].getNome() << std::endl;
+            cout << getServidores().size() << std::endl;
+            for(int i = 0; i < getServidores().size(); i++){
+                cout << getServidores()[i].getNome() << std::endl;
             }
         }
 
@@ -302,21 +303,25 @@ void Sistema::Logado(){
 
             while(true){
                 string server = textotratado.substr(0, textotratado.find("\n"));
-                std::vector<Servidor>::iterator it = this->getServidores().begin();
-                for(int i = 0; i < this->getServidores().size(); i++){
-                    if(this->getServidores()[i].getNome() == server && this->getServidores()[i].getDonoId() == this->getIdUsuarioLogado()){
-                        cout << "Servidor " << this->getServidores()[i].getNome() << " removido" << std::endl;
-                        this->servidores.erase(it);
+                // std::vector<Servidor> servidoresaux = getServidores();
+                for(int i = 0; i < servidores.size(); i++){
+                    if(servidores[i].getNome() == server && servidores[i].getDonoId() == getIdUsuarioLogado()){
+                        Servidor servidorauxiliar;
+                        servidorauxiliar = servidores[servidores.size()-1];
+                        servidores[servidores.size()-1] = servidores[i];
+                        servidores[i] = servidorauxiliar;
+                        cout << "Servidor " << servidores[servidores.size()-1].getNome() << " removido" << std::endl;
+                        servidores.pop_back();
                         operacaoconcluida = true;
+                       
                         break;
                     }
-                    it++;
                 }
                 if(operacaoconcluida == true) break;
 
-                for(int i = 0; i < this->getServidores().size(); i++){
-                    if(this->getServidores()[i].getNome() == server && this->getServidores()[i].getDonoId() != this->getIdUsuarioLogado()){
-                        cout << "Você não é o dono do servidor " << this->getServidores()[i].getNome() << std::endl;
+                for(int i = 0; i < servidores.size(); i++){
+                    if(servidores[i].getNome() == server && servidores[i].getDonoId() != this->getIdUsuarioLogado()){
+                        cout << "Você não é o dono do servidor " << servidores[i].getNome() << std::endl;
                         operacaoconcluida = true;
                         break;
                     }
