@@ -1,0 +1,62 @@
+\hypertarget{classCanal}{}\doxysection{Canal Class Reference}
+\label{classCanal}\index{Canal@{Canal}}
+
+
+Classe que representa canal.  
+
+
+
+
+{\ttfamily \#include $<$canal.\+hpp$>$}
+
+
+
+Inheritance diagram for Canal\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCanal_a903e160b4b73d3339ca9b60ebcd2aa95}\label{classCanal_a903e160b4b73d3339ca9b60ebcd2aa95}} 
+\mbox{\hyperlink{classCanal_a903e160b4b73d3339ca9b60ebcd2aa95}{Canal}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classCanal}{Canal}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCanal_a1d594c155598889751e87bde39a7404e}{Canal}} (string nome)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classCanal}{Canal}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCanal_ad93e5c48eccf0e06a1adbec376afe2e8}\label{classCanal_ad93e5c48eccf0e06a1adbec376afe2e8}} 
+\mbox{\hyperlink{classCanal_ad93e5c48eccf0e06a1adbec376afe2e8}{$\sim$\+Canal}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classCanal}{Canal}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}\label{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}} 
+void {\bfseries set\+Nome} (string nome)
+\item 
+\mbox{\Hypertarget{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}\label{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}} 
+string {\bfseries get\+Nome} ()
+\item 
+\mbox{\Hypertarget{classCanal_af37fc41ffc471f968b3bed5310d61eff}\label{classCanal_af37fc41ffc471f968b3bed5310d61eff}} 
+virtual string {\bfseries get\+Tipo} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe que representa canal. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCanal_a1d594c155598889751e87bde39a7404e}\label{classCanal_a1d594c155598889751e87bde39a7404e}} 
+\index{Canal@{Canal}!Canal@{Canal}}
+\index{Canal@{Canal}!Canal@{Canal}}
+\doxysubsubsection{\texorpdfstring{Canal()}{Canal()}}
+{\footnotesize\ttfamily Canal\+::\+Canal (\begin{DoxyParamCaption}\item[{string}]{nome }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classCanal}{Canal}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nome} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/canal.\+hpp\item 
+src/canal.\+cpp\end{DoxyCompactItemize}
