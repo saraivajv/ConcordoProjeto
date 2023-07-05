@@ -1,4 +1,6 @@
 #include "../include/sistema.hpp"
+#include <ctime>
+#include <sstream>
 
 
 Sistema::Sistema(std::vector<Usuario> usuarios, std::vector<Servidor> servidores, int idUsuarioLogado, Servidor servidorAtual, Canal canalAtual){
@@ -61,6 +63,51 @@ std::vector<Usuario> Sistema::getUsuarios(){
 
 std::vector<Servidor> Sistema::getServidores(){
     return this->servidores;
+}
+
+/**
+ * @brief Função auxiliar que converte int em string
+ * 
+ * @param value valor passado
+ * @return char 
+ */
+char IntToChar(int value) {
+    if (value < 0 || value > 9) {
+        return '0';
+    }
+
+    return (char)(value + 48);
+}
+
+/**
+ * @brief Função auxiliar que converte int em string
+ * 
+ * @param value valor passado
+ * @return char 
+ */
+std::string IntToString(int value) {
+    std::string buffer = std::string();
+
+    std::vector<int> splitValue;
+
+    while (true) {
+
+        splitValue.insert(splitValue.begin(), value % 10);
+
+        value /= 10;
+
+        if (value == 0)
+            break;
+    }
+
+    for (int i = 0; i < splitValue.size(); i++) {
+
+        buffer += IntToChar(splitValue[i]);
+    }
+
+    splitValue.clear();
+
+    return buffer;
 }
 
 void Sistema::TelaInicial(){
@@ -175,32 +222,173 @@ void Sistema::TelaInicial(){
 void Sistema::Logado(){
     string linha, textotratado;
     Servidor novoservidor;
+    time_t horaatual = time(0);
+
+        tm* datahora = localtime(&horaatual);
+        string dia = IntToString(datahora->tm_mday);
+        string mes = IntToString(1 + datahora->tm_mon);
+        string ano = IntToString(1900 + datahora->tm_year);
+        string hora = IntToString(datahora->tm_hour);
+        string minuto = IntToString(datahora->tm_min);
 
     while(true){
         getline(std::cin, linha);
 
         if(getServidorAtual().getNome() != "nulo"){
 
+            if(canalAtual.getNome().empty() == true){
+                Canal nulo;
+                nulo.setNome("nulo");
+                canalAtual = nulo;
+            }
+
             if(linha.find("create-channel ") != std::string::npos){
-                Servidor serveraux = this->servidorAtual;
+                string tipo;
+                bool canalexiste = false;
                 int pos = linha.find(" ");
                 textotratado = linha.substr(pos+1, linha.find("\n"));
                 string nomecanal = textotratado.substr(0, textotratado.find(" "));
                 string tipocanal = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
 
-                if(tipocanal == "texto"){
+                    for(int i = 0; i < servidorAtual.getCanais().size(); i++){
+                        tipo = servidorAtual.getCanais()[i]->getTipo();
+                        if(servidorAtual.getCanais()[i]->getNome() == nomecanal && tipo == tipocanal){
+                            cout << "Canal de " << tipo << " " << nomecanal << " já existe!" << std::endl;
+                            canalexiste = true;
+                            break;
+                        }
+                    }
+                
+
+                if(tipocanal == "texto" && canalexiste == false){
                     CanalTexto *tchannel = new CanalTexto();
                     tchannel->setNome(nomecanal);
-                    serveraux.setCanal(tchannel);
-                    cout << serveraux.getCanais()[0]->getNome() << std::endl;
+                    servidorAtual.setCanal(tchannel);
+                    cout << "Canal de texto " << nomecanal << " criado" << std::endl;
+                    // delete tchannel;
                 }
-                if(tipocanal == "voz"){
+                if(tipocanal == "voz" && canalexiste == false){
                     CanalVoz *vchannel = new CanalVoz();
                     vchannel->setNome(nomecanal);
-                    serveraux.setCanal(vchannel);
-                    cout << serveraux.getCanais()[0]->getNome() << std::endl;
+                    servidorAtual.setCanal(vchannel);
+                    cout << "Canal de voz " << nomecanal << " criado" << std::endl;
+                    // delete vchannel;
                 }
             }
+
+            if(linha.find("list-channels") != std::string::npos){
+                cout << "#canais de texto" << std::endl;
+                for(int i = 0; i < servidorAtual.getCanais().size(); i++){
+                    if(servidorAtual.getCanais()[i]->getTipo() == "texto"){
+                        cout << servidorAtual.getCanais()[i]->getNome() << std::endl;
+                    }
+                }
+                cout << "#canais de voz" << std::endl;
+                for(int i = 0; i < servidorAtual.getCanais().size(); i++){
+                    if(servidorAtual.getCanais()[i]->getTipo() == "voz"){
+                        cout << servidorAtual.getCanais()[i]->getNome() << std::endl;
+                    }
+                }
+
+            }
+
+            if(linha.find("enter-channel ") != std::string::npos){
+                int pos = linha.find(" ");
+                string nomecanal = linha.substr(pos+1, linha.find("\n"));
+
+                for(int i = 0; i < servidorAtual.getCanais().size(); i++){
+                    if(nomecanal == servidorAtual.getCanais()[i]->getNome()){
+                        cout << "Entrou no canal " << servidorAtual.getCanais()[i]->getNome() << std::endl;
+                        if(servidorAtual.getCanais()[i]->getTipo() == "texto"){
+                            CanalTexto *tchannel = dynamic_cast<CanalTexto*>(this->servidorAtual.getCanais()[i]);
+                            setCanalAtual(*tchannel);
+                            this->servidorAtual.getCanais()[i] = tchannel;
+                            // delete tchannel;
+                            break;
+                        }
+                        else if(servidorAtual.getCanais()[i]->getTipo() == "voz"){
+                            CanalVoz *vchannel = dynamic_cast<CanalVoz*>(this->servidorAtual.getCanais()[i]);
+                            setCanalAtual(*vchannel);
+                            this->servidorAtual.getCanais()[i] = vchannel;
+                            // delete vchannel;
+                            break;
+                        }
+                    }
+                    else if(i+1 == servidorAtual.getCanais().size()){
+                        cout << "Canal " << nomecanal << " não existe" << std::endl;
+                        break;
+                    }
+                }
+            }
+
+            if(linha.find("leave-channel") != std::string::npos){
+                Canal nulo;
+                setCanalAtual(nulo);
+                cout << "Saindo do canal" << std::endl;
+            }
+
+            if(canalAtual.getNome() != "nulo"){
+                for(int i = 0; i < this->getServidorAtual().getCanais().size(); i++){
+                    if(linha.find("send-message ") != std::string::npos){
+                        string msg = linha.substr(linha.find(" ")+1, linha.find("\n"));
+                        string horario = dia + "/" + mes + "/" + ano + " - " + hora + ":" + minuto;
+
+                        if(this->getServidorAtual().getCanais()[i]->getTipo() == "texto" && canalAtual.getNome() == this->getServidorAtual().getCanais()[i]->getNome()){
+                            Mensagem m = Mensagem(horario, idUsuarioLogado, msg);
+                            CanalTexto *tchannel = dynamic_cast<CanalTexto*>(this->getServidorAtual().getCanais()[i]);
+                            tchannel->setMensagem(m);
+                            this->getServidorAtual().getCanais()[i] = tchannel;
+                            break;
+                        }
+                        else if(this->getServidorAtual().getCanais()[i]->getTipo() == "voz" && canalAtual.getNome() == this->getServidorAtual().getCanais()[i]->getNome()){
+                            Mensagem m = Mensagem(horario, idUsuarioLogado, msg);
+                            CanalVoz *vchannel = dynamic_cast<CanalVoz*>(this->getServidorAtual().getCanais()[i]);
+                            vchannel->setUltimaMensagem(m);
+                            this->getServidorAtual().getCanais()[i] = vchannel;
+                            break;
+                        }
+                    }
+
+                }
+
+                if(linha.find("list-messages") != std::string::npos){
+                    for(int i = 0; i < this->getServidorAtual().getCanais().size(); i++){
+                        if(this->getServidorAtual().getCanais()[i]->getTipo() == "texto" && canalAtual.getNome() == this->getServidorAtual().getCanais()[i]->getNome()){
+                            string nomeusuario;
+                            CanalTexto *tchannel = dynamic_cast<CanalTexto*>(this->getServidorAtual().getCanais()[i]);
+                            cout << tchannel->getNome() << std::endl;
+                            for(int j = 0; j < tchannel->getMensagens().size(); j++){
+                                int idcheck = tchannel->getMensagens()[j].getIdEnviado();
+
+                                for(int k = 0; k < usuarios.size(); k++){
+                                    if(idcheck == usuarios[k].getId()){
+                                        nomeusuario = usuarios[k].getNome();
+                                        break;
+                                    }
+                                }
+                                cout << nomeusuario << "<" << tchannel->getMensagens()[j].getDataHora() << ">: " << tchannel->getMensagens()[j].getConteudoMensagem() << std::endl;
+                            }
+                        }
+                        else if(this->getServidorAtual().getCanais()[i]->getTipo() == "voz" && canalAtual.getNome() == this->getServidorAtual().getCanais()[i]->getNome()){
+                            string nomeusuario;
+                            CanalVoz *vchannel = dynamic_cast<CanalVoz*>(this->getServidorAtual().getCanais()[i]);
+                            cout << vchannel->getNome() << std::endl;
+                                int idcheck = vchannel->getUltimaMensagem().getIdEnviado();
+                                for(int k = 0; k < usuarios.size(); k++){
+                                    if(idcheck == usuarios[k].getId()){
+                                        nomeusuario = usuarios[k].getNome();
+                                        break;
+                                    }
+                                }
+                                cout << nomeusuario << "<" << vchannel->getUltimaMensagem().getDataHora() << ">: " << vchannel->getUltimaMensagem().getConteudoMensagem() << std::endl;
+                        }
+                    }
+                        
+
+
+                }
+            }
+
 
         }
 
@@ -328,7 +516,6 @@ void Sistema::Logado(){
 
             while(true){
                 string server = textotratado.substr(0, textotratado.find("\n"));
-                // std::vector<Servidor> servidoresaux = getServidores();
                 for(int i = 0; i < servidores.size(); i++){
                     if(servidores[i].getNome() == server && servidores[i].getDonoId() == getIdUsuarioLogado()){
                         Servidor servidorauxiliar;

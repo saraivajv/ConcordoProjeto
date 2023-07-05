@@ -35,6 +35,12 @@ class Mensagem{
  * 
  */
         ~Mensagem();
+
+        string getDataHora();
+
+        int getIdEnviado();
+
+        string getConteudoMensagem();
 };
 
 #endif

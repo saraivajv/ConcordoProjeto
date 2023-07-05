@@ -11,3 +11,15 @@ Mensagem::Mensagem()
 
 Mensagem::~Mensagem()
 {};
+
+string Mensagem::getDataHora(){
+    return this->dataHora;
+}
+
+int Mensagem::getIdEnviado(){
+    return this->enviadoPor;
+}
+
+string Mensagem::getConteudoMensagem(){
+    return this->conteudo;
+}

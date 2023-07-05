@@ -35,6 +35,8 @@ class Canal{
         void setNome(string nome);
 
         string getNome();
+
+        virtual string getTipo();
 };
 
 #endif

@@ -16,3 +16,7 @@ void Canal::setNome(string nome){
 string Canal::getNome(){
     return this->nome;
 }
+
+string Canal::getTipo(){
+    return "nada";
+}

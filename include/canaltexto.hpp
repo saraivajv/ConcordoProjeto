@@ -34,6 +34,12 @@ class CanalTexto : public Canal
  * 
  */
         ~CanalTexto();
+
+        string getTipo() override;
+
+        void setMensagem(Mensagem mensagem);
+
+        std::vector<Mensagem> getMensagens();
 };
 
 #endif

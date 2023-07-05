@@ -34,6 +34,12 @@ class CanalVoz : public Canal
  * 
  */
         ~CanalVoz();
+
+        string getTipo() override;
+
+        void setUltimaMensagem(Mensagem mensagem);
+
+        Mensagem getUltimaMensagem();
 };
 
 #endif
