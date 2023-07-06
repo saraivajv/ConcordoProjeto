@@ -1,6 +1,6 @@
 #include "../include/sistema.hpp"
-#include <ctime>
-#include <sstream>
+#include<ctime>
+#include<fstream>
 
 
 Sistema::Sistema(std::vector<Usuario> usuarios, std::vector<Servidor> servidores, int idUsuarioLogado, Servidor servidorAtual, Canal canalAtual){
@@ -587,9 +587,9 @@ void Sistema::Logado(){
         if(linha.find("leave-server") != std::string::npos){
             Servidor nulo;
             if(this->getServidorAtual().getNome() != ""){
+                cout << "Saindo do servidor " << this->getServidorAtual().getNome() << std::endl;
                 nulo.setNome("nulo");
                 this->setServidorAtual(nulo);
-                cout << "Saindo do servidor " << this->getServidorAtual().getNome() << std::endl;
             }
             else if(this->getServidorAtual().getNome() == ""){
                 cout << "Você não está visualizando nenhum servidor" << std::endl;
