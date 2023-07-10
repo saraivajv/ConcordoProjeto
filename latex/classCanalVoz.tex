@@ -2,6 +2,15 @@
 \label{classCanalVoz}\index{CanalVoz@{CanalVoz}}
 
 
+Classe que representa um canal de voz.  
+
+
+
+
+{\ttfamily \#include $<$canalvoz.\+hpp$>$}
+
+
+
 Inheritance diagram for Canal\+Voz\+:
 % FIG 0
 
@@ -19,16 +28,16 @@ Collaboration diagram for Canal\+Voz\+:
 \mbox{\Hypertarget{classCanalVoz_a39f0eeced6c5139b6949249cae2c7584}\label{classCanalVoz_a39f0eeced6c5139b6949249cae2c7584}} 
 \mbox{\hyperlink{classCanalVoz_a39f0eeced6c5139b6949249cae2c7584}{$\sim$\+Canal\+Voz}} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classCanal}{Canal}} Voz object. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classCanalVoz_a4b829fcdd963f9bbeb31b56c4066a02b}\label{classCanalVoz_a4b829fcdd963f9bbeb31b56c4066a02b}} 
-string {\bfseries get\+Tipo} () override
-\item 
-\mbox{\Hypertarget{classCanalVoz_a08d2127e1833d6727dc79938e1e3d0cf}\label{classCanalVoz_a08d2127e1833d6727dc79938e1e3d0cf}} 
-void {\bfseries set\+Ultima\+Mensagem} (\mbox{\hyperlink{classMensagem}{Mensagem}} mensagem)
-\item 
-\mbox{\Hypertarget{classCanalVoz_acc210f2a7170abade926669b4c53cad4}\label{classCanalVoz_acc210f2a7170abade926669b4c53cad4}} 
-\mbox{\hyperlink{classMensagem}{Mensagem}} {\bfseries get\+Ultima\+Mensagem} ()
-\end{DoxyCompactItemize}
+string \mbox{\hyperlink{classCanalVoz_a4b829fcdd963f9bbeb31b56c4066a02b}{get\+Tipo}} () override
+\begin{DoxyCompactList}\small\item\em Get the Tipo object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCanalVoz_a08d2127e1833d6727dc79938e1e3d0cf}{set\+Ultima\+Mensagem}} (\mbox{\hyperlink{classMensagem}{Mensagem}} mensagem)
+\begin{DoxyCompactList}\small\item\em Set the Ultima \mbox{\hyperlink{classMensagem}{Mensagem}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMensagem}{Mensagem}} \mbox{\hyperlink{classCanalVoz_acc210f2a7170abade926669b4c53cad4}{get\+Ultima\+Mensagem}} ()
+\begin{DoxyCompactList}\small\item\em Get the Ultima \mbox{\hyperlink{classMensagem}{Mensagem}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Classe que representa um canal de voz. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classCanalVoz_ab6573a29303a3c8920fbeb50ce3625fa}\label{classCanalVoz_ab6573a29303a3c8920fbeb50ce3625fa}} 
@@ -44,6 +53,54 @@ Construct a new \mbox{\hyperlink{classCanal}{Canal}} Voz object.
 
 \begin{DoxyParams}{Parameters}
 {\em ultima\+Mensagem} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCanalVoz_a4b829fcdd963f9bbeb31b56c4066a02b}\label{classCanalVoz_a4b829fcdd963f9bbeb31b56c4066a02b}} 
+\index{CanalVoz@{CanalVoz}!getTipo@{getTipo}}
+\index{getTipo@{getTipo}!CanalVoz@{CanalVoz}}
+\doxysubsubsection{\texorpdfstring{getTipo()}{getTipo()}}
+{\footnotesize\ttfamily string Canal\+Voz\+::get\+Tipo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the Tipo object. 
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classCanal_af37fc41ffc471f968b3bed5310d61eff}{Canal}}.
+
+\mbox{\Hypertarget{classCanalVoz_acc210f2a7170abade926669b4c53cad4}\label{classCanalVoz_acc210f2a7170abade926669b4c53cad4}} 
+\index{CanalVoz@{CanalVoz}!getUltimaMensagem@{getUltimaMensagem}}
+\index{getUltimaMensagem@{getUltimaMensagem}!CanalVoz@{CanalVoz}}
+\doxysubsubsection{\texorpdfstring{getUltimaMensagem()}{getUltimaMensagem()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMensagem}{Mensagem}} Canal\+Voz\+::get\+Ultima\+Mensagem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Ultima \mbox{\hyperlink{classMensagem}{Mensagem}} object. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classMensagem}{Mensagem}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCanalVoz_a08d2127e1833d6727dc79938e1e3d0cf}\label{classCanalVoz_a08d2127e1833d6727dc79938e1e3d0cf}} 
+\index{CanalVoz@{CanalVoz}!setUltimaMensagem@{setUltimaMensagem}}
+\index{setUltimaMensagem@{setUltimaMensagem}!CanalVoz@{CanalVoz}}
+\doxysubsubsection{\texorpdfstring{setUltimaMensagem()}{setUltimaMensagem()}}
+{\footnotesize\ttfamily void Canal\+Voz\+::set\+Ultima\+Mensagem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMensagem}{Mensagem}}}]{mensagem }\end{DoxyParamCaption})}
+
+
+
+Set the Ultima \mbox{\hyperlink{classMensagem}{Mensagem}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mensagem} & \\
 \hline
 \end{DoxyParams}
 

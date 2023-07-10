@@ -1,6 +1,7 @@
 #include "../include/sistema.hpp"
 #include<ctime>
 #include<fstream>
+#include<sstream>
 
 
 Sistema::Sistema(std::vector<Usuario> usuarios, std::vector<Servidor> servidores, int idUsuarioLogado, Servidor servidorAtual, Canal canalAtual){
@@ -167,9 +168,11 @@ void Sistema::TelaInicial(){
                 id++;
                 this->setIdNovoUsuario(id);
             }
+            salvar();
         }
 
         if(linha.find("login ") != std::string::npos){
+            carregar();
             pos = linha.find(" ");
             textotratado = linha.substr(pos+1, linha.find("\n"));
             int i = 0;
@@ -263,17 +266,30 @@ void Sistema::Logado(){
                 if(tipocanal == "texto" && canalexiste == false){
                     CanalTexto *tchannel = new CanalTexto();
                     tchannel->setNome(nomecanal);
-                    servidorAtual.setCanal(tchannel);
+                    for(int i = 0; i < servidores.size(); i++){
+                        if(servidores[i].getNome() == servidorAtual.getNome()){
+                            servidores[i].setCanal(tchannel);
+                            servidorAtual.setCanal(tchannel);
+                            cout << servidores[i].getCanais()[0]->getNome() << std::endl;
+                        }
+                    }
                     cout << "Canal de texto " << nomecanal << " criado" << std::endl;
                     // delete tchannel;
                 }
                 if(tipocanal == "voz" && canalexiste == false){
                     CanalVoz *vchannel = new CanalVoz();
                     vchannel->setNome(nomecanal);
-                    servidorAtual.setCanal(vchannel);
+                    for(int i = 0; i < servidores.size(); i++){
+                        if(servidores[i].getNome() == servidorAtual.getNome()){
+                            servidores[i].setCanal(vchannel);
+                            servidorAtual.setCanal(vchannel);
+                            cout << servidores[i].getCanais()[1]->getNome() << std::endl;
+                        }
+                    }
                     cout << "Canal de voz " << nomecanal << " criado" << std::endl;
                     // delete vchannel;
                 }
+                salvar();
             }
 
             if(linha.find("list-channels") != std::string::npos){
@@ -338,6 +354,7 @@ void Sistema::Logado(){
                             CanalTexto *tchannel = dynamic_cast<CanalTexto*>(this->getServidorAtual().getCanais()[i]);
                             tchannel->setMensagem(m);
                             this->getServidorAtual().getCanais()[i] = tchannel;
+                            salvar();
                             break;
                         }
                         else if(this->getServidorAtual().getCanais()[i]->getTipo() == "voz" && canalAtual.getNome() == this->getServidorAtual().getCanais()[i]->getNome()){
@@ -345,6 +362,7 @@ void Sistema::Logado(){
                             CanalVoz *vchannel = dynamic_cast<CanalVoz*>(this->getServidorAtual().getCanais()[i]);
                             vchannel->setUltimaMensagem(m);
                             this->getServidorAtual().getCanais()[i] = vchannel;
+                            salvar();
                             break;
                         }
                     }
@@ -422,6 +440,7 @@ void Sistema::Logado(){
                 this->setServidorAtual(novoservidor);
                 cout << "Servidor criado" << std::endl;
             }
+            salvar();
         }
 
         if(linha.find("set-server-desc ") != std::string::npos){
@@ -431,11 +450,17 @@ void Sistema::Logado(){
 
             while(textotratado.find(" ") < textotratado.find("\n")){
                 string server = textotratado.substr(0, textotratado.find(" "));
-                textotratado = textotratado.substr(textotratado.find(" "), textotratado.find("\n"));
+                textotratado = textotratado.substr(textotratado.find(" ")+1, textotratado.find("\n"));
                 if(server == this->getServidorAtual().getNome()){
                     if(this->getServidorAtual().getDonoId() == this->getIdUsuarioLogado()){
                         string descricao = textotratado;
                         this->getServidorAtual().setDescricao(descricao);
+                        for(int i = 0; i < servidores.size(); i++){
+                            if(servidores[i].getNome() == getServidorAtual().getNome()){
+                                servidores[i].setDescricao(descricao);
+                                break;
+                            }
+                        }
                         cout << "Descrição do servidor " << this->getServidorAtual().getNome() << " modificada!" << std::endl;
                         break;
                     }
@@ -455,6 +480,7 @@ void Sistema::Logado(){
                     break;
                 }
             }
+            salvar();
         }
 
         if(linha.find("set-server-invite-code ") != std::string::npos){
@@ -471,6 +497,7 @@ void Sistema::Logado(){
                         if(this->getServidores()[i].getNome() == server){
                             if(this->getServidores()[i].getDonoId() == this->getIdUsuarioLogado()){
                                 this->getServidores()[i].setCodigoConvite(codigoconvite);
+                                servidores[i].setCodigoConvite(codigoconvite);
                                 cout << "Código de convite do servidor " << this->getServidores()[i].getNome() << " removido!" << std::endl;
                                 break;
                             }
@@ -488,6 +515,7 @@ void Sistema::Logado(){
                             if(servidorAnalisado.getDonoId() == this->getIdUsuarioLogado()){
                                 codigoconvite = textotratado;
                                 servidorAnalisado.setCodigoConvite(codigoconvite);
+                                servidores[i].setCodigoConvite(codigoconvite);
                                 cout << servidorAnalisado.getCodigoConvite() << std::endl;
                                 cout << "Código de convite do servidor " << servidorAnalisado.getNome() << " modificado!" << std::endl;
                                 break;
@@ -497,7 +525,7 @@ void Sistema::Logado(){
                     break;
                 }
             }
-
+            salvar();
         }
         
         if(linha.find("list-servers") != std::string::npos){
@@ -544,9 +572,11 @@ void Sistema::Logado(){
                 operacaoconcluida = true;
                 if(operacaoconcluida == true) break;
             }
+            salvar();
         }
 
         if(linha.find("enter-server ") != std::string::npos){
+            carregar();
             int pos = linha.find(" ");
             string server;
             string codigoconvite;
@@ -618,10 +648,205 @@ void Sistema::Logado(){
                 }
             }
         }
-        
-
     }
+}
 
+void Sistema::salvar(){
+    salvarUsuarios();
+    salvarServidores();
+}
 
+void Sistema::salvarUsuarios(){
+    std::ofstream novoarquivo("usuarios.txt");
 
+    novoarquivo << this->usuarios.size() << std::endl;
+    for(int i = 0; i < usuarios.size(); i++){
+        novoarquivo << usuarios[i].getId() << std::endl;
+        novoarquivo << usuarios[i].getNome() << std::endl;
+        novoarquivo << usuarios[i].getEmail() << std::endl;
+        novoarquivo << usuarios[i].getSenha() << std::endl;
+    }
+    novoarquivo.close();
+}
+
+void Sistema::salvarServidores(){
+    std::ofstream novoarquivo("servidores.txt");
+
+    novoarquivo << this->servidores.size() << std::endl;
+    for(int i = 0; i < servidores.size(); i++){
+        novoarquivo << servidores[i].getDonoId() << std::endl;
+        novoarquivo << servidores[i].getNome() << std::endl;
+        novoarquivo << servidores[i].getDescricao() << std::endl;
+        novoarquivo << servidores[i].getCodigoConvite() << std::endl;
+        novoarquivo << servidores[i].getParticipantesId().size() << std::endl;
+        for(int j = 0; j < servidores[i].getParticipantesId().size(); j++){
+            novoarquivo << servidores[i].getParticipantesId()[j] << std::endl;
+        }
+        novoarquivo << servidores[i].getCanais().size() << std::endl;
+        for(int j = 0; j < servidores[i].getCanais().size(); j++){
+            novoarquivo << servidores[i].getCanais()[j]->getNome() << std::endl;
+            novoarquivo << servidores[i].getCanais()[j]->getTipo() << std::endl;
+
+            if(servidores[i].getCanais()[j]->getTipo() == "texto"){
+                CanalTexto *tchannel = dynamic_cast<CanalTexto*>(servidores[i].getCanais()[j]);
+                for(int k = 0; k < tchannel->getMensagens().size(); k++){
+                    novoarquivo << tchannel->getMensagens()[k].getDataHora() << std::endl;
+                    novoarquivo << tchannel->getMensagens()[k].getConteudoMensagem() << std::endl;
+                    novoarquivo << tchannel->getMensagens()[k].getIdEnviado() << std::endl;
+                }
+                // delete tchannel;
+            }
+            else if(servidores[i].getCanais()[j]->getTipo() == "voz"){
+                CanalVoz *vchannel = dynamic_cast<CanalVoz*>(servidores[i].getCanais()[j]);
+                novoarquivo << vchannel->getUltimaMensagem().getDataHora() << std::endl;
+                novoarquivo << vchannel->getUltimaMensagem().getConteudoMensagem() << std::endl;
+                novoarquivo << vchannel->getUltimaMensagem().getIdEnviado() << std::endl;
+                // delete vchannel;
+            }
+        }
+    }
+    novoarquivo.close();
+}
+
+void Sistema::carregar(){
+    carregarUsuarios();
+    carregarServidores();
+}
+
+void Sistema::carregarUsuarios(){
+    std::fstream arquivousuarios("usuarios.txt");
+    string linhalida;
+    int id, n;
+    int aux = 0;
+    int j = 0;
+    while(getline(arquivousuarios, linhalida)){
+        if(aux == 0){
+            getline(arquivousuarios, linhalida);
+            std::stringstream ss(linhalida);
+            ss >> n;
+        }
+        aux++;
+        if(aux != 0 && j+1 <= n){
+            for(int i = 0; i < 4; i++){
+                if(i == 0){
+                    getline(arquivousuarios, linhalida);
+                    std::stringstream ss(linhalida);
+                    ss >> id;
+                    usuarios[j].setId(id);
+               }
+               else if(i == 1){
+                    getline(arquivousuarios, linhalida);
+                    usuarios[j].setNome(linhalida);
+               }
+               else if(i == 2){
+                    getline(arquivousuarios, linhalida);
+                    usuarios[j].setEmail(linhalida);
+               }
+               else if(i == 3){
+                    getline(arquivousuarios, linhalida);
+                    usuarios[j].setSenha(linhalida);
+               }
+            }
+            if(j+1 <= n){
+                j++;
+            }
+        }
+    }
+    arquivousuarios.close();
+}
+
+void Sistema::carregarServidores(){
+    std::fstream arquivoservidores;
+    arquivoservidores.open("servidores.txt");
+    string linhalida;
+    int id, n, nparticipantes, ncanais, idparticipante;
+    int aux = 0;
+    int j = 0;
+    while(getline(arquivoservidores, linhalida)){
+        if(aux == 0){
+            getline(arquivoservidores, linhalida);
+            std::stringstream ss(linhalida);
+            ss >> n;
+        }
+        aux++;
+        if(aux != 0 && j+1 <= n){
+            for(int i = 0; i < 6; i++){
+                if(i == 0){
+                    getline(arquivoservidores, linhalida);
+                    std::stringstream ss(linhalida);
+                    ss >> id;
+                    servidores[j].setDonoId(id);
+               }
+               else if(i == 1){
+                    getline(arquivoservidores, linhalida);
+                    servidores[j].setNome(linhalida);
+               }
+               else if(i == 2){
+                    getline(arquivoservidores, linhalida);
+                    servidores[j].setDescricao(linhalida);
+               }
+               else if(i == 3){
+                    getline(arquivoservidores, linhalida);
+                    servidores[j].setCodigoConvite(linhalida);
+               }
+               else if(i == 4){
+                    getline(arquivoservidores, linhalida);
+                    std::stringstream ss(linhalida);
+                    ss >> nparticipantes;
+                    for(int k = 0; k < nparticipantes; k++){
+                        getline(arquivoservidores, linhalida);
+                        std::stringstream ss(linhalida);
+                        ss >> idparticipante;
+                        servidores[j].setParticipantesId(idparticipante);
+                    }
+               }
+               else if(i == 5){
+                    getline(arquivoservidores, linhalida);
+                    std::stringstream ss(linhalida);
+                    ss >> ncanais;
+                    for(int k = 0; k < ncanais; k++){
+                        getline(arquivoservidores, linhalida);
+                        string nomecanal = linhalida;
+                        getline(arquivoservidores, linhalida);
+                        string tipocanal = linhalida;
+                        getline(arquivoservidores, linhalida);
+                        string horamensagem = linhalida;
+
+                        if(tipocanal == "texto"){
+                            getline(arquivoservidores, linhalida);
+                            string conteudomsg = linhalida;
+                            getline(arquivoservidores, linhalida);
+                            std::stringstream ss(linhalida);
+                            int idmsgenviada;
+                            ss >> idmsgenviada;
+                            CanalTexto tchannel;
+                            Mensagem msg(horamensagem, idmsgenviada, conteudomsg);
+                            tchannel.setNome(nomecanal);
+                            tchannel.setMensagem(msg);
+                            Canal *canalnormal = dynamic_cast<Canal*>(&tchannel);
+                            servidores[j].setCanal(canalnormal);
+                        }
+                        if(tipocanal == "voz"){
+                            getline(arquivoservidores, linhalida);
+                            string conteudomsg = linhalida;
+                            getline(arquivoservidores, linhalida);
+                            std::stringstream ss(linhalida);
+                            int idmsgenviada;
+                            ss >> idmsgenviada;
+                            CanalVoz vchannel;
+                            Mensagem msg(horamensagem, idmsgenviada, conteudomsg);
+                            vchannel.setNome(nomecanal);
+                            vchannel.setUltimaMensagem(msg);
+                            Canal *canalnormal = dynamic_cast<Canal*>(&vchannel);
+                            servidores[j].setCanal(canalnormal);
+                        }
+                    }
+               }
+            }
+            if(j+1 <= n){
+                j++;
+            }
+        }
+    }
+    arquivoservidores.close();
 }

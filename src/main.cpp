@@ -1,5 +1,6 @@
 #include "../include/sistema.hpp"
 #include "../include/mensagem.hpp"
+#include <fstream>
 
 using std::cin;
 

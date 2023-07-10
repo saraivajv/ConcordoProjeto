@@ -24,15 +24,12 @@ Inheritance diagram for Canal\+:
 \mbox{\Hypertarget{classCanal_ad93e5c48eccf0e06a1adbec376afe2e8}\label{classCanal_ad93e5c48eccf0e06a1adbec376afe2e8}} 
 \mbox{\hyperlink{classCanal_ad93e5c48eccf0e06a1adbec376afe2e8}{$\sim$\+Canal}} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classCanal}{Canal}} object. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}\label{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}} 
-void {\bfseries set\+Nome} (string nome)
-\item 
-\mbox{\Hypertarget{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}\label{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}} 
-string {\bfseries get\+Nome} ()
-\item 
-\mbox{\Hypertarget{classCanal_af37fc41ffc471f968b3bed5310d61eff}\label{classCanal_af37fc41ffc471f968b3bed5310d61eff}} 
-virtual string {\bfseries get\+Tipo} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}{set\+Nome}} (string nome)
+\begin{DoxyCompactList}\small\item\em Set the Nome object. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}{get\+Nome}} ()
+\begin{DoxyCompactList}\small\item\em Get the Nome object. \end{DoxyCompactList}\item 
+virtual string \mbox{\hyperlink{classCanal_af37fc41ffc471f968b3bed5310d61eff}{get\+Tipo}} ()
+\begin{DoxyCompactList}\small\item\em Get the Tipo object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -48,6 +45,54 @@ Classe que representa canal.
 
 
 Construct a new \mbox{\hyperlink{classCanal}{Canal}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nome} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}\label{classCanal_a04ed845ff5fea38f4e5e5e63ab3858e3}} 
+\index{Canal@{Canal}!getNome@{getNome}}
+\index{getNome@{getNome}!Canal@{Canal}}
+\doxysubsubsection{\texorpdfstring{getNome()}{getNome()}}
+{\footnotesize\ttfamily string Canal\+::get\+Nome (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Nome object. 
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCanal_af37fc41ffc471f968b3bed5310d61eff}\label{classCanal_af37fc41ffc471f968b3bed5310d61eff}} 
+\index{Canal@{Canal}!getTipo@{getTipo}}
+\index{getTipo@{getTipo}!Canal@{Canal}}
+\doxysubsubsection{\texorpdfstring{getTipo()}{getTipo()}}
+{\footnotesize\ttfamily string Canal\+::get\+Tipo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the Tipo object. 
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classCanalVoz_a4b829fcdd963f9bbeb31b56c4066a02b}{Canal\+Voz}}, and \mbox{\hyperlink{classCanalTexto_ad403ad039ad7a00cd8c10fe90d5095db}{Canal\+Texto}}.
+
+\mbox{\Hypertarget{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}\label{classCanal_a0ebd41538e722d962c1fd4eca907e0bd}} 
+\index{Canal@{Canal}!setNome@{setNome}}
+\index{setNome@{setNome}!Canal@{Canal}}
+\doxysubsubsection{\texorpdfstring{setNome()}{setNome()}}
+{\footnotesize\ttfamily void Canal\+::set\+Nome (\begin{DoxyParamCaption}\item[{string}]{nome }\end{DoxyParamCaption})}
+
+
+
+Set the Nome object. 
 
 
 \begin{DoxyParams}{Parameters}

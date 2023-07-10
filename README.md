@@ -3,10 +3,12 @@ Projeto de aplicativo com funcionalidades semelhantes ao Discord em c++.
 
 ## Funcionalidades presentes
 * Manipulação de arquivos
-* Métodos novos na classe Lista
-* Sobrecarga de operadores na classe Lista (incompleto)
-* Métodos novos na classe Playlist
-* Sobrecarga de operadores na classe Playlist (incompleto)
+* Criação e Gerenciamento de Usuários
+* Criação e Gerenciamento de Servidores
+* Criação e Gerenciamento de Canais de Texto e Voz
+* Função para salvar os dados de runtime do programa
+* Função para carregar os dados no runtime do programa
+
 
 ## Documentação
 Documentação feita com Doxygen, enviando arquivos .tex e .html.
@@ -55,7 +57,7 @@ Documentação feita com Doxygen, enviando arquivos .tex e .html.
 </ol>
 
 ## Dificuldades
-O list-participants está parcialmente funcional.
+Vazamento de memória
 
 ## Aluno
 * João Victor Gonçalves de Albuquerque Saraiva

@@ -9,7 +9,7 @@
 
 using std::string, std::cout;
 /**
- * @brief 
+ * @brief Classe que representa um canal de voz
  * 
  */
 class CanalVoz : public Canal
@@ -34,11 +34,23 @@ class CanalVoz : public Canal
  * 
  */
         ~CanalVoz();
-
+        /**
+         * @brief Get the Tipo object
+         * 
+         * @return string 
+         */
         string getTipo() override;
-
+        /**
+         * @brief Set the Ultima Mensagem object
+         * 
+         * @param mensagem 
+         */
         void setUltimaMensagem(Mensagem mensagem);
-
+        /**
+         * @brief Get the Ultima Mensagem object
+         * 
+         * @return Mensagem 
+         */
         Mensagem getUltimaMensagem();
 };
 

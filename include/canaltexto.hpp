@@ -9,7 +9,7 @@
 
 using std::string, std::cout;
 /**
- * @brief 
+ * @brief Classe que representa um canal de texto
  * 
  */
 class CanalTexto : public Canal
@@ -34,11 +34,23 @@ class CanalTexto : public Canal
  * 
  */
         ~CanalTexto();
-
+        /**
+         * @brief Get the Tipo object
+         * 
+         * @return string 
+         */
         string getTipo() override;
-
+        /**
+         * @brief Set the Mensagem object
+         * 
+         * @param mensagem 
+         */
         void setMensagem(Mensagem mensagem);
-
+        /**
+         * @brief Get the Mensagens object
+         * 
+         * @return std::vector<Mensagem> 
+         */
         std::vector<Mensagem> getMensagens();
 };
 

@@ -6,7 +6,7 @@ digraph "Graphical Class Hierarchy"
   rankdir="LR";
   Node0 [label="Canal",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCanal.html",tooltip="Classe que representa canal."];
   Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 [label="CanalTexto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCanalTexto.html",tooltip=" "];
+  Node1 [label="CanalTexto",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCanalTexto.html",tooltip="Classe que representa um canal de texto."];
   Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="CanalVoz",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCanalVoz.html",tooltip=" "];
+  Node2 [label="CanalVoz",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCanalVoz.html",tooltip="Classe que representa um canal de voz."];
 }

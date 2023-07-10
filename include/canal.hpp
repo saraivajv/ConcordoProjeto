@@ -31,11 +31,23 @@ class Canal{
  * 
  */
         ~Canal();
-
+        /**
+         * @brief Set the Nome object
+         * 
+         * @param nome 
+         */
         void setNome(string nome);
-
+        /**
+         * @brief Get the Nome object
+         * 
+         * @return string 
+         */
         string getNome();
-
+        /**
+         * @brief Get the Tipo object
+         * 
+         * @return string 
+         */
         virtual string getTipo();
 };
 

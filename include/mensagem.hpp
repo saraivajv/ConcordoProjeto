@@ -7,7 +7,7 @@
 
 using std::string, std::cout;
 /**
- * @brief 
+ * @brief Classe que representa uma mensagem enviada
  * 
  */
 class Mensagem{
@@ -35,11 +35,23 @@ class Mensagem{
  * 
  */
         ~Mensagem();
-
+        /**
+         * @brief Get the Data Hora object
+         * 
+         * @return string 
+         */
         string getDataHora();
-
+        /**
+         * @brief Get the Id Enviado object
+         * 
+         * @return int 
+         */
         int getIdEnviado();
-
+        /**
+         * @brief Get the Conteudo Mensagem object
+         * 
+         * @return string 
+         */
         string getConteudoMensagem();
 };
 

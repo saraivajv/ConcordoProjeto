@@ -2,6 +2,15 @@
 \label{classCanalTexto}\index{CanalTexto@{CanalTexto}}
 
 
+Classe que representa um canal de texto.  
+
+
+
+
+{\ttfamily \#include $<$canaltexto.\+hpp$>$}
+
+
+
 Inheritance diagram for Canal\+Texto\+:
 % FIG 0
 
@@ -19,16 +28,16 @@ Collaboration diagram for Canal\+Texto\+:
 \mbox{\Hypertarget{classCanalTexto_acf7deecb09ffbe4c9ac32f7ba4f07e62}\label{classCanalTexto_acf7deecb09ffbe4c9ac32f7ba4f07e62}} 
 \mbox{\hyperlink{classCanalTexto_acf7deecb09ffbe4c9ac32f7ba4f07e62}{$\sim$\+Canal\+Texto}} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classCanal}{Canal}} Texto object. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classCanalTexto_ad403ad039ad7a00cd8c10fe90d5095db}\label{classCanalTexto_ad403ad039ad7a00cd8c10fe90d5095db}} 
-string {\bfseries get\+Tipo} () override
-\item 
-\mbox{\Hypertarget{classCanalTexto_a20a99d253f26a4838e6aad3c98e850bc}\label{classCanalTexto_a20a99d253f26a4838e6aad3c98e850bc}} 
-void {\bfseries set\+Mensagem} (\mbox{\hyperlink{classMensagem}{Mensagem}} mensagem)
-\item 
-\mbox{\Hypertarget{classCanalTexto_a0e564c2ccea858f61ff8baeb46ed8672}\label{classCanalTexto_a0e564c2ccea858f61ff8baeb46ed8672}} 
-std\+::vector$<$ \mbox{\hyperlink{classMensagem}{Mensagem}} $>$ {\bfseries get\+Mensagens} ()
-\end{DoxyCompactItemize}
+string \mbox{\hyperlink{classCanalTexto_ad403ad039ad7a00cd8c10fe90d5095db}{get\+Tipo}} () override
+\begin{DoxyCompactList}\small\item\em Get the Tipo object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCanalTexto_a20a99d253f26a4838e6aad3c98e850bc}{set\+Mensagem}} (\mbox{\hyperlink{classMensagem}{Mensagem}} mensagem)
+\begin{DoxyCompactList}\small\item\em Set the \mbox{\hyperlink{classMensagem}{Mensagem}} object. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classMensagem}{Mensagem}} $>$ \mbox{\hyperlink{classCanalTexto_a0e564c2ccea858f61ff8baeb46ed8672}{get\+Mensagens}} ()
+\begin{DoxyCompactList}\small\item\em Get the Mensagens object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Classe que representa um canal de texto. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classCanalTexto_a30bff88114f4d1af3bc8283af5c8b0d9}\label{classCanalTexto_a30bff88114f4d1af3bc8283af5c8b0d9}} 
@@ -44,6 +53,54 @@ Construct a new \mbox{\hyperlink{classCanal}{Canal}} Texto object.
 
 \begin{DoxyParams}{Parameters}
 {\em mensagens} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCanalTexto_a0e564c2ccea858f61ff8baeb46ed8672}\label{classCanalTexto_a0e564c2ccea858f61ff8baeb46ed8672}} 
+\index{CanalTexto@{CanalTexto}!getMensagens@{getMensagens}}
+\index{getMensagens@{getMensagens}!CanalTexto@{CanalTexto}}
+\doxysubsubsection{\texorpdfstring{getMensagens()}{getMensagens()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classMensagem}{Mensagem}} $>$ Canal\+Texto\+::get\+Mensagens (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Mensagens object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Mensagem$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCanalTexto_ad403ad039ad7a00cd8c10fe90d5095db}\label{classCanalTexto_ad403ad039ad7a00cd8c10fe90d5095db}} 
+\index{CanalTexto@{CanalTexto}!getTipo@{getTipo}}
+\index{getTipo@{getTipo}!CanalTexto@{CanalTexto}}
+\doxysubsubsection{\texorpdfstring{getTipo()}{getTipo()}}
+{\footnotesize\ttfamily string Canal\+Texto\+::get\+Tipo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the Tipo object. 
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classCanal_af37fc41ffc471f968b3bed5310d61eff}{Canal}}.
+
+\mbox{\Hypertarget{classCanalTexto_a20a99d253f26a4838e6aad3c98e850bc}\label{classCanalTexto_a20a99d253f26a4838e6aad3c98e850bc}} 
+\index{CanalTexto@{CanalTexto}!setMensagem@{setMensagem}}
+\index{setMensagem@{setMensagem}!CanalTexto@{CanalTexto}}
+\doxysubsubsection{\texorpdfstring{setMensagem()}{setMensagem()}}
+{\footnotesize\ttfamily void Canal\+Texto\+::set\+Mensagem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMensagem}{Mensagem}}}]{mensagem }\end{DoxyParamCaption})}
+
+
+
+Set the \mbox{\hyperlink{classMensagem}{Mensagem}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mensagem} & \\
 \hline
 \end{DoxyParams}
 

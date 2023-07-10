@@ -11,11 +11,10 @@
 
 using std::string, std::cout;
 
-/*
-* @brief Classe que representa o sistema controlador do concordo.
-*
-*
-*/
+/**
+ * @brief Classe que representa o sistema controlador do concordo.
+ * 
+ */
 class Sistema{
     private:
         std::vector<Usuario> usuarios;
@@ -24,6 +23,11 @@ class Sistema{
         Servidor servidorAtual;
         Canal canalAtual;
         int idNovoUsuario;
+
+        void salvarUsuarios();
+        void salvarServidores();
+        void carregarUsuarios();
+        void carregarServidores();
 
     public:
 
@@ -131,6 +135,16 @@ class Sistema{
          * 
          */
         ~Sistema();
+        /**
+         * @brief Função para salvar os dados de runtime do programa
+         * 
+         */
+        void salvar();
+        /**
+         * @brief Função para carregar os dados no runtime do programa
+         * 
+         */
+        void carregar();
 
 };
 
